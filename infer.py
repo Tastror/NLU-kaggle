@@ -125,12 +125,12 @@ for problem in processed_data[start_pos:]:
     end = False
     predicted_index = 0
 
-    print(f"\nProblem ID: {problem['id']}")
-    prompt_for_model_cot = create_prompt_cot_answer_index(problem["data"])
-    print(prompt_for_model_cot)
-    inputs_cot = tokenizer(prompt_for_model_cot, return_tensors="pt").to(device)
-
     while not end:
+
+        print(f"\nProblem ID: {problem['id']}")
+        prompt_for_model_cot = create_prompt_cot_answer_index(problem["data"])
+        print("-" * retry_map.get(problem['id'], 0) + prompt_for_model_cot)
+        inputs_cot = tokenizer(prompt_for_model_cot, return_tensors="pt").to(device)
 
         outputs_cot = model.generate(**inputs_cot, max_new_tokens=4096)
         response_ids_cot = outputs_cot[0][inputs_cot.input_ids.shape[1]:]
