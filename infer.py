@@ -1,10 +1,14 @@
 import os
 import csv
+import sys
 import json
 import torch
 
 
-choose = "qwen"
+if len(sys.argv) > 1:
+    choose = sys.argv[1]
+else:
+    choose = "deepseek"
 
 if choose in ["mistral", "deepseek"]:
     from transformers import AutoModelForCausalLM, AutoTokenizer
