@@ -144,6 +144,11 @@ for problem in processed_data[start_pos:]:
             total_retry += 1
             end = False
 
+        if retry_map.get(problem['id'], 0) > 10:
+            print(f"\033[31mExceeded maximum retries for problem ID {problem['id']}. Skipping...\033[0m")
+            predicted_index = 4  # choose E (error case)
+            end = True
+
     print("\033[33m")
     print(f"Retry count for problem ID {problem['id']}: {retry_map.get(problem['id'], 0)}")
     print(f"total retry count: {total_retry}")
