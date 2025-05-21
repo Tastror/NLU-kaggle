@@ -4,3 +4,4 @@ __pycache__/
 token
 
 result_*.csv
+retry_map_*.json

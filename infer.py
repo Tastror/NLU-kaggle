@@ -162,6 +162,6 @@ for problem in processed_data[start_pos:]:
 outfile.close()
 
 print(f"Total retries: {total_retry}")
-with open("retry_map.json", "w") as f:
+with open(f"retry_map_{result_suffix}.json", "w") as f:
     json.dump(retry_map, f)
-print("Retry map saved to retry_map.json")
+print(f"Retry map saved to retry_map_{result_suffix}.json")
