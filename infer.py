@@ -122,7 +122,7 @@ for problem in processed_data[start_pos:]:
 
     while not end:
 
-        outputs_cot = model.generate(**inputs_cot, max_new_tokens=99999)
+        outputs_cot = model.generate(**inputs_cot, max_new_tokens=4096)
         response_ids_cot = outputs_cot[0][inputs_cot.input_ids.shape[1]:]
         model_response_raw_cot = tokenizer.decode(response_ids_cot, skip_special_tokens=True).strip()
 
