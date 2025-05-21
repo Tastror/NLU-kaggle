@@ -129,7 +129,7 @@ for problem in processed_data[start_pos:]:
 
         print(f"\nProblem ID: {problem['id']}")
         prompt_for_model_cot = create_prompt_cot_answer_index(problem["data"])
-        print("-" * retry_map.get(problem['id'], 0) + prompt_for_model_cot)
+        print("well, " * retry_map.get(problem['id'], 0) + prompt_for_model_cot)
         inputs_cot = tokenizer(prompt_for_model_cot, return_tensors="pt").to(device)
 
         outputs_cot = model.generate(**inputs_cot, max_new_tokens=4096)
@@ -146,7 +146,7 @@ for problem in processed_data[start_pos:]:
             total_retry += 1
             end = False
 
-        if retry_map.get(problem['id'], 0) > 10:
+        if retry_map.get(problem['id'], 0) > 5:
             print(f"\033[31mExceeded maximum retries for problem ID {problem['id']}. Skipping...\033[0m")
             predicted_index = 4  # choose E (error case)
             end = True
