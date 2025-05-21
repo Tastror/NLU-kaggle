@@ -10,6 +10,11 @@ if len(sys.argv) > 1:
 else:
     choose = "deepseek"
 
+if len(sys.argv) > 2:
+    device_id = sys.argv[2]
+else:
+    device_id = "0"
+
 if choose in ["mistral", "deepseek"]:
     from transformers import AutoModelForCausalLM, AutoTokenizer
     model_name = "mistralai/Mistral-7B-v0.1"; result_suffix = "mistral"
@@ -22,7 +27,7 @@ else:
     exit()
 
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = f"cuda:{device_id}" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
 
 
