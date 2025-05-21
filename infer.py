@@ -91,9 +91,9 @@ infile.close()
 def create_prompt_cot_answer_index(problem_data):
     global choose
     if choose in ["deepseek"]:
-        return f"Please give your thought process and find the answer (format example: \\boxed{{result: A}}).\n{problem_data}\nPlease reason step by step, and put your final answer within \\boxed{{}}\nThought process & answer: To "
+        return f"Please give your thought process and find the answer.\n{problem_data}\nPlease reason step by step, and output your final answer.\nThought process & answer: To "
     else:
-        return f"Please give your thought process and find the answer (format example: `result: A`).\n{problem_data}\nThought process & answer: To "
+        return f"Please give your thought process and find the answer.\n{problem_data}\nThought process & answer: To "
 
 def parse_cot_index_output(model_output_str):
     import re
