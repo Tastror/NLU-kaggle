@@ -68,7 +68,10 @@ else:
         with open(result_csv, "r") as f:
             reader = csv.reader(f)
             last_row = list(reader)[-1]
-            start_pos = int(last_row[0])
+            try:
+                start_pos = int(last_row[0])
+            except ValueError:
+                start_pos = 0
             print(f"Starting from Id: {start_pos}")
         outfile = open(result_csv, "a")
 
