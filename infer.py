@@ -128,8 +128,8 @@ for problem in processed_data[start_pos:]:
     while not end:
 
         print(f"\nProblem ID: {problem['id']}")
-        prompt_for_model_cot = create_prompt_cot_answer_index(problem["data"])
-        print("well, " * retry_map.get(problem['id'], 0) + prompt_for_model_cot)
+        prompt_for_model_cot = "well, " * retry_map.get(problem['id'], 0) + create_prompt_cot_answer_index(problem["data"])
+        print(prompt_for_model_cot)
         inputs_cot = tokenizer(prompt_for_model_cot, return_tensors="pt").to(device)
 
         outputs_cot = model.generate(**inputs_cot, max_new_tokens=4096)
