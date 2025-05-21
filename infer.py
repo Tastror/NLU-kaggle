@@ -17,8 +17,10 @@ else:
 
 if choose in ["mistral", "deepseek"]:
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    model_name = "mistralai/Mistral-7B-v0.1"; result_suffix = "mistral"
-    model_name = "deepseek-ai/deepseek-math-7b-rl"; result_suffix = "deepseek"
+    if choose == "mistral":
+        model_name = "mistralai/Mistral-7B-v0.1"; result_suffix = "mistral"
+    elif choose == "deepseek":
+        model_name = "deepseek-ai/deepseek-math-7b-rl"; result_suffix = "deepseek"
 elif choose in ["qwen"]:
     from modelscope import AutoModelForCausalLM, AutoTokenizer
     model_name = "Qwen/Qwen-7B-Chat"; result_suffix = "qwen"
