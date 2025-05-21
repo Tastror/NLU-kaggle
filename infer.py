@@ -85,8 +85,11 @@ infile.close()
 # problem_data = "question: Ali is the principal of a private school where he teaches one class. John is also the principal of a public school. John has two classes in his school. The capacity of each class is 1/8 of the capacity of Ali's class, which has 120 students. What is the total capacity of the two schools?\nchoices: A. 947 B. 899 C. 150 D. 803"
 
 def create_prompt_cot_answer_index(problem_data):
-    # return rf"please give your thought process and find the answer (format example: `result: A`).\n{problem_data}\nthought process & answer: To "
-    return rf"Please give your thought process and find the answer (format example: \boxed{{result: A}}).\n{problem_data}\nPlease reason step by step, and put your final answer within \boxed{{}}"
+    global choose
+    if choose in ["deepseek"]:
+        return f"Please give your thought process and find the answer (format example: \\boxed{{result: A}}).\n{problem_data}\nPlease reason step by step, and put your final answer within \\boxed{{}}\nThought process & answer: To "
+    else:
+        return f"Please give your thought process and find the answer (format example: `result: A`).\n{problem_data}\nThought process & answer: To "
 
 def parse_cot_index_output(model_output_str):
     import re
