@@ -16,14 +16,21 @@ else:
     device_id = "0"
 
 if choose in ["mistral", "deepseek"]:
+    from huggingface_hub import login
+    with open("token", "r") as f:
+        token = f.read().strip()
+    login(token=token)
     from transformers import AutoModelForCausalLM, AutoTokenizer
     if choose == "mistral":
         model_name = "mistralai/Mistral-7B-v0.1"; result_suffix = "mistral"
     elif choose == "deepseek":
         model_name = "deepseek-ai/deepseek-math-7b-rl"; result_suffix = "deepseek"
-elif choose in ["qwen"]:
+elif choose in ["qwen", "deepseek-r1"]:
     from modelscope import AutoModelForCausalLM, AutoTokenizer
-    model_name = "Qwen/Qwen-7B-Chat"; result_suffix = "qwen"
+    if choose == "qwen":
+        model_name = "Qwen/Qwen-7B-Chat"; result_suffix = "qwen"
+    elif choose == "deepseek-r1":
+        model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"; result_suffix = "deepseek-r1"
 else:
     print("Invalid model choice.")
     exit()
@@ -31,12 +38,6 @@ else:
 
 device = f"cuda:{device_id}" if torch.cuda.is_available() else "cpu"
 print(f"Using device: {device}")
-
-
-from huggingface_hub import login
-with open("token", "r") as f:
-    token = f.read().strip()
-login(token=token)
 
 try:
     print(f"Loading tokenizer for {model_name}...")
